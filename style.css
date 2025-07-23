@@ -1,3 +1,4 @@
+/*To create an background that fills the screen entirely. Even with the height set 100% in the class, the background will not extend to the very edge without these properties set*/
 html, body{                                                                             
     height: 100%;
     margin: 0;
