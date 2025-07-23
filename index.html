@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <table border="1">                                                                              <!--Sets the thickness of encapsulating table border-->
+            <tr>
+                <td colspan="4">
+                    <input type="text" id="inputBox" value="0" readonly/>                               <!--The "readonly" makes it a read only i.e. a display so you cannot enter values-->
+                </td>
+            </tr>
+            <tr>
+                <td class="digitButton" onclick = "digitBtnPressed(7)">7</td>
+                <td class="digitButton" onclick = "digitBtnPressed(8)">8</td>
+                <td class="digitButton" onclick = "digitBtnPressed(9)">9</td>
+                <td class="operatorButton" onclick = "btnOperatorPressed('/')">/</td>
+            </tr>
+            <tr>
+                <td class="digitButton" onclick = "digitBtnPressed(4)">4</td>
+                <td class="digitButton" onclick = "digitBtnPressed(5)">5</td>
+                <td class="digitButton" onclick = "digitBtnPressed(6)">6</td>
+                <td class="operatorButton" onclick = "btnOperatorPressed('x')">x</td>
+            </tr>
+            <tr>
+                <td class="digitButton" onclick = "digitBtnPressed(1)">1</td>
+                <td class="digitButton" onclick = "digitBtnPressed(2)">2</td>
+                <td class="digitButton" onclick = "digitBtnPressed(3)">3</td>
+                <td class="operatorButton" onclick = "btnOperatorPressed('-')">-</td>
+            </tr>
+            <tr>
+                <td class="digitButton" colspan="2" onclick = "digitBtnPressed(0)">0</td>
+                <td class= "ACButton" onclick = "btnACPressed()" >AC</td>
+                <td class="operatorButton" onclick = "btnOperatorPressed('+')">+</td>
+            </tr>
+            <tr>
+                <td class="operatorButton"  colspan="4" onclick ="btnEqualPressed()" >=</td>
+            </tr>
+        </table>
+        <script> 
+            var newLine = true;                                                                         //Toggles to control new entry of digits to the display on the inputBox/Calc screen
+            var num1=0;
+            var num2=0;
+            var finalTotal=0;
+            var currentOperator = null;
+
+            //Event handler for number button presses
+            function digitBtnPressed(button){
+                if(newLine){                                                                            //Show the first number pressed and ignore the 0 that is always there when you start the Calc
+                    document.getElementById("inputBox").value = button;
+                    newLine= false;
+                }
+                else{
+                    var currentValue = document.getElementById("inputBox").value;
+                    document.getElementById("inputBox").value = currentValue + button;
+                }
+            }
+
+            //Event handler for math operation pressed(+,-,*,/)
+            function btnOperatorPressed(operator){
+                var enteredValue = Number(document.getElementById("inputBox").value); 
+                
+                //If there's an operator and a new number, calculate intermediate result    
+                if (currentOperator !== null && !newLine) {
+                    num1 = executeOperation(num1, enteredValue, currentOperator);
+                    document.getElementById("inputBox").value = num1;
+                } 
+                //If there was no previous operator selected before this, then store the entered number
+                else if (currentOperator === null) {
+                    num1 = enteredValue;
+                }
+
+                currentOperator = operator;
+                newLine= true;
+            }
+            
+            //Event handler for equals button pressed
+            function btnEqualPressed(){
+                num2 = Number(document.getElementById("inputBox").value);
+                finalTotal=executeOperation(num1,num2,currentOperator);
+
+                //If the result is NaN then display an error message
+                if(isNaN(finalTotal)){
+                    document.getElementById("inputBox").value = "Undefined";    
+                }
+                //If the result is Infinity then display an Infinity even if one of the value is infinity
+                else if(finalTotal === Infinity){
+                    document.getElementById("inputBox").value = "Infinity";
+                }
+                else{
+                    document.getElementById("inputBox").value = finalTotal;
+                }   
+
+
+                //Reset for new calculations with the current result
+                num1 = finalTotal;
+                newLine= true;
+                currentOperator = null;
+                
+            }
+
+            //Event handler for the clear all
+            function btnACPressed(){
+                    document.getElementById("inputBox").value = 0;
+                    newLine= true;
+                    num1 = 0;
+                    num2 = 0;
+                    finalTotal = 0;
+                    currentOperator = null;
+            }
+
+            //Event handler to compute mathematical operation
+            function executeOperation(previousValue, recentValue,operator){
+                switch(operator){
+                    case "+":
+                        return previousValue + recentValue; 
+                        break;
+                    case "-":
+                        return previousValue - recentValue; 
+                        break;
+                    case "x":
+                        return previousValue * recentValue; 
+                        break;
+                    case "/":
+                        return previousValue / recentValue; 
+                        break;
+                    default:
+                        return recentValue;                                                             //If no operator was selcted return the last number entered
+                }
+            }
+
+        </script>
+    </body>
+</html>

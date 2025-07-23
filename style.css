@@ -1,0 +1,47 @@
+html, body{                                                                             
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/*The table*/
+table{
+    color: white;
+    text-align: center;
+    border-collapse: collapse;                                          /*Adjacent table cell borders collapse into a single border*/
+    font: normal 3em Arial, Helvetica, sans-serif;                      /*font stlye (normal bold italic, font size, font family*/
+}
+
+/*Each row*/
+tr{
+    height: 16.64vh;                                                    /*View point height. Each row 16% of the window - 100/6= 16,67*/
+    background-color: #F5F5F5;
+}
+
+/*Each column*/
+td{
+    width: 25vw;                                                        /*View point width. Each column 25% of the window - 100/4= 25*/    
+    background-color: 1px #F5F5F5;
+}
+
+#inputBox{
+    background-color: #F5F5F5;
+    text-align: right;
+    width: 100%;
+    font-size: 2em;
+    color: black;
+    border: 0;
+    padding:0%;
+}
+
+.digitButton{
+    background-color: rgba(140, 139, 139);
+}
+
+.operatorButton{
+    background-color: rgb(218, 166, 70);
+}
+
+.ACButton{
+    background-color: rgb(96, 96, 96);
+}
