@@ -16,4 +16,4 @@ The original version covered in the course introduced basic calculator functiona
   - ✅ Cleaner UX: Improved logic and error handling ensure a smoother experience and more predictable results.
 
 ## Interface  
-<img width="500" height="650" alt="Calculator interface" src="https://github.com/user-attachments/assets/86786e39-4713-4b81-bf9d-d56be4535dea" />
+<img width="300" height="450" alt="Calculator interface" src="https://github.com/user-attachments/assets/86786e39-4713-4b81-bf9d-d56be4535dea" />
